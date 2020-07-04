@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Word Counts</title>
+</head>
+<body>
+	<div class="container">
+		
+		<form action="/" method = "POST">
+		 	<div class="form-group">
+
+		 		<!-- Takes the URL to the word_count route-->
+
+		  		<div class="col-xs-4">
+			    	<label for="url">Enter the URL:</label>
+			    	{%if success%}
+						<input class="form-control input-sm" id="url" name = "url" value=" {{success}} " required="required">
+					{%else%}
+						<input class="form-control input-sm" id="url" name = "url" placeholder="Enter the URL" required="required">
+			    	{%endif%}
+					<div style= "text-align:center;margin-top: 20px;">
+			    		<button type="submit" class="btn btn-default">Count</button>
+			    	</div>
+			    	{%if error%}
+						<br>
+            			<label style="color:red;">{{ error }}</label>
+            		{%endif%}
+				</div>
+		   	</div>
+		</form>
+
+		<!-- Spacing b/w Input and Output-->
+
+		<div class="col-xs-2"></div>
+
+		<!--Display the words and its frequency in form of table -->
+			{%if success%}
+				<div class="col-xs-4">
+					<table class = "table table-hover">
+						<tr>
+							<th>Words</th>
+							<th>Frequency</th>
+						</tr>
+						{%for key,value in result.items()%}
+				            <tr>
+				                <td>{{key }}</td>
+				                <td>{{value}}</td>
+				            </tr>
+			            {%endfor%}
+				</div>
+			{%endif%}
+	</div>
+
+</body>
+</html>
